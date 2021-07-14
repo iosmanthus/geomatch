@@ -192,7 +192,7 @@ func extractAttr(payload string) (string, string, error) {
 	return payload[:idx], payload[idx+1:], nil
 }
 
-func extractDomainList(payload string, geoSiteList *v2ray.GeoSiteList) ([]*v2ray.Domain, error) {
+func ExtractDomainList(payload string, geoSiteList *v2ray.GeoSiteList) ([]*v2ray.Domain, error) {
 	countryCode, expectedAttr, err := extractAttr(payload)
 	if err != nil {
 		return nil, err
@@ -256,7 +256,7 @@ func (b *DomainMatcherBuilder) Build() (*DomainMatcher, error) {
 		var domains []*v2ray.Domain
 		switch cond.prefix {
 		case "geosite":
-			extracted, err := extractDomainList(cond.payload, geoList)
+			extracted, err := ExtractDomainList(cond.payload, geoList)
 			if err != nil {
 				return nil, err
 			}
